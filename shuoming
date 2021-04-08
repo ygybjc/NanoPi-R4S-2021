@@ -1,0 +1,21 @@
+更新日志 3.28
+解禁R4S的GPU
+添加了 R2S/R4S 的硬件转码，可以用 Jellyfin， 1080p HEVC 10bit 60fps 无需 CPU 参与.如何使用？R4S→服务→Docker→容器→新建→第一个蓝色按钮输入命令，下面全复制到输入命令框里，然后点击提交。等他进度完了，再去容器里打勾启用它，再点端口那个，随便一个就进去了，剩下自己搞吧。。。
+docker run -d --name jellyfin
+-v /mnt/sda/video:/video
+-p 8096:8096
+-p 8920:8920
+--user 1000:1000
+--device /dev/dri/renderD128:/dev/dri/renderD128
+--device /dev/dri/card0:/dev/dri/card0
+--restart unless-stopped
+jellyfin/jellyfin 
+更新内核 5.4.106
+移除多线多拨，负载均衡；这两个插件移除，不会在某个情况下频繁掉线
+再次修复R4S的一些TF卡兼容性问题（不能启动/重启死机等）
+支持全新的 SS-RUST ，替代 SS
+UU加速器更新到 2.7.8
+性能再提升20%
+优化开机加载
+优化超频稳定性
+新增cpu优化调节器，提高网络波动稳定性（后期加上）
